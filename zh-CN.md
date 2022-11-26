@@ -41,6 +41,8 @@ appkey：appid对应的密钥，访问用户资源时用来验证应用的合法
 
 ### 4. 通过授权码(Authorization Code)获取访问令牌(Access Token)
 
+此步骤必须在您的应用服务器完成
+
 请求地址：  
 ```https://api.bandbbs.cn/oauth/api/token.php```  
 请求方法：  
@@ -60,5 +62,7 @@ GET
 如果错误，返回状态码将是非200，返回内容体将会是错误信息  
 
 ### 5.通过访问令牌(Access Token)访问资源  
+
+此步骤必须在您的应用服务器完成
 
 此项目具体内容请与管理员商定  
