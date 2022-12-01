@@ -13,7 +13,7 @@ appkey：appid对应的密钥，访问用户资源时用来验证应用的合法
 ### 3. 唤起接口获取授权码(Authorization Code)
 
 用户跳转地址：  
-```https://api.bandbbs.cn/oauth/```  
+```https://www.bandbbs.cn/oauth/```  
 
 请求参数：  
 |  参数   | 说明  |
@@ -24,7 +24,7 @@ appkey：appid对应的密钥，访问用户资源时用来验证应用的合法
 | state  | 状态值，必须为32位由小写字母和/或数字组成的值。用于防止CSRF攻击，成功授权后回调时会原样带回。请务必严格检查用户与state参数状态的绑定 |
 
 例如：  
-```https://api.bandbbs.cn/oauth/?response_type=code&client_id=1&redirect_uri=https%3A%2F%2Ftest.bandbbs.cn%2Fcallback.php&state=7a990681fc5c697092236ee1e4ece2d0```  
+```https://www.bandbbs.cn/oauth/?response_type=code&client_id=1&redirect_uri=https%3A%2F%2Ftest.bandbbs.cn%2Fcallback.php&state=7a990681fc5c697092236ee1e4ece2d0```  
 
 返回说明：  
 1. 如果用户成功登录授权，则会跳转到指定的回调地址，并在redirect_uri地址后带上Authorization Code和原始的state值。如：  
