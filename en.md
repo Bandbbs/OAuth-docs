@@ -13,7 +13,7 @@ Insert the Bandbbs Account Login button or selection into your app or webpage
 ### 3. Redirect to interface to get Authorization Code
 
 redirect URL：  
-```https://api.bandbbs.cn/oauth/```  
+```https://www.bandbbs.cn/oauth/```  
 
 Request Parameters：  
 |  Parameter   | Description |
@@ -24,7 +24,7 @@ Request Parameters：
 | state  | Status value, which must be a 32-digit value composed of lowercase letters and/or numbers. It is used to prevent CSRF attacks and will be called back after successful authorization. Please make sure to strictly check the binding of the user to the state parameter status |
 
 URL example：  
-```https://api.bandbbs.cn/oauth/?response_type=code&client_id=1&redirect_uri=https%3A%2F%2Ftest.bandbbs.cn%2Fcallback.php&state=7a990681fc5c697092236ee1e4ece2d0```  
+```https://www.bandbbs.cn/oauth/?response_type=code&client_id=1&redirect_uri=https%3A%2F%2Ftest.bandbbs.cn%2Fcallback.php&state=7a990681fc5c697092236ee1e4ece2d0```  
 
 Return：  
 1. If the user successfully login to authorize, the user will be redirected to the callback address provided, with the Authorization Code and the original state value at the end of the redirect_uri address.  
