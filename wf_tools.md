@@ -6,7 +6,7 @@
 此步骤必须在您的应用服务器完成
 
 请求地址： 
-```https://develop.ranfu.net/oauth/api/wftools.php```  
+```https://api.bandbbs.cn/oauth/api/wftools.php```  
 
 请求方法：  
 GET  
@@ -57,7 +57,7 @@ JSON内容：
 此接口不会校验是否修改成功，请比对输入的新MAC地址与返回的MAC地址确保修改成功
 
 请求地址： 
-```https://develop.ranfu.net/oauth/api/wftools.php```  
+```https://api.bandbbs.cn/oauth/api/wftools.php```  
 
 请求方法：  
 POST 
