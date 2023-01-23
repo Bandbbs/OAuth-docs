@@ -38,7 +38,7 @@ Note: The Authorization Code expires 10 minutes after the user has successfully 
 | state  | Status value. It is used to prevent CSRF attacks and will be called back after successful authorization. Please make sure to strictly check the binding of the user to the state parameter status |
 
 2. If the user cancels the login process during the login authorization process, the login page will be closed directly  
-3. If the input parameters are wrong, the wrong parameters will be displayed on page directly  
+3. If the input parameters are wrong, the wrong parameters will be displayed on page directly. Error Response is at the end of this doc.
 
 ### 4. Get Access Token by Authorization Code
 
@@ -60,10 +60,22 @@ Request Parameters：
 
 Return value：  
 If the return is successful, the content of the return will be an Access Token.  
-If error, the status code will be not 200 and the return content is the error message  
+If error, the status code will be not 200 and the return content is the error message.
+Error Response is at the end of this doc.
 
 ### 5. Access to resources by Access Token  
 
 This step must be performed on your server  
 
 Please contact the administrator for the details of this step  
+
+
+------------------------------------------------
+
+Error Response：  
+|  Response   | Description  |
+|  ----  | ----  |
+| unsupported_response_type  | Invalid authorization type |
+| unauthorized_client  | client_id or api_key Invalid |
+| invalid_grant  | Invalid Authorization Code  |
+| invalid_redirect_uri  | Invalid callback address |
