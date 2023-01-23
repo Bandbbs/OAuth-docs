@@ -42,7 +42,7 @@ JSON内容：
 |  参数   | 说明  |
 |  ----  | ----  |
 | success  | 请求是否成功 失败时为false |
-| msg  | 仅当success为false时存在 内容为失败原因 |
+| msg  | 仅当success为false时存在 内容为失败原因 文档末尾附错误响应内容 |
 
 
 
@@ -101,6 +101,18 @@ JSON内容：
 |  参数   | 说明  |
 |  ----  | ----  |
 | success  | 请求是否成功 失败时为false |
-| msg  | 仅当success为false时存在 内容为失败原因 |
+| msg  | 仅当success为false时存在 内容为失败原因  文档末尾附错误响应内容 |
+
+
+------------------------------------------------
+
+错误内容：  
+|  msg返回值   | 说明  |
+|  ----  | ----  |
+| unauthorized_client  | client_id或api_key有误 |
+| invalid_grant  | 用户授权码无效 |
+| invalid_mac  | mac地址不合法 |
+| account_banned  | 用户账户被封禁 |
+| account_not_activated  | 用户账户未激活或被封禁 |
 
 
