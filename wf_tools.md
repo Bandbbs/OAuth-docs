@@ -14,7 +14,7 @@ GET
 请求头：  
 |  参数   | 说明  |
 |  ----  | ----  |
-| access-token  | 前序步骤中获取到的授权码(Authorization Code) |
+| access-token  | 前序步骤中获取到的访问令牌(Access Token) |
 | client-id  | 分配给应用的appid |
 | client-secret  | 分配给应用的appkey |
 
@@ -65,7 +65,7 @@ POST
 请求头：  
 |  参数   | 说明  |
 |  ----  | ----  |
-| access-token  | 前序步骤中获取到的授权码(Authorization Code) |
+| access-token  | 前序步骤中获取到的访问令牌(Access Token) |
 | client-id  | 分配给应用的appid |
 | client-secret  | 分配给应用的appkey |
 
