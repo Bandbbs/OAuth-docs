@@ -35,6 +35,7 @@ JSON内容：
 | user_name  | 用户名 |
 | avatar_urls  | 米坛用户头像URL |
 | mac  | 用户的表盘自定义工具的MAC绑定 |
+| contributor  | 拥有捐赠者权限 |
 
 
 失败：  
