@@ -1,11 +1,11 @@
 # 米坛社区 OAuth API 文档
 
 ### 1. 获取 申请 客户端ID 和 客户端密钥
-
+```
 客户端ID：应用的唯一标识。用于识别接入应用的身份  
 客户端密钥：客户端ID对应的密钥，访问用户资源时用来验证应用的合法性 
 权限类型： 用于判断权限
-
+```
 ### 2. 放置 米坛社区帐号 登录 按钮
 
 将米坛社区帐号 登录 按钮或选项放入您的APP或者网页  
@@ -49,6 +49,7 @@
 ```https://www.bandbbs.cn/api/oauth2/token```  
 请求方法：  
 POST 
+
 请求参数：  
 |  参数   | 说明  |
 |  ----  | ----  |
@@ -61,6 +62,7 @@ POST
 
 返回值：  
 如果成功返回，将返回类似如下内容
+```
 {
     "access_token": "4f40d5ee8bf0476cb6b6f42ed53247a1",
     "refresh_token": "f6bec4e6ef7470fc6f0101e3975ad4b9",
@@ -68,6 +70,7 @@ POST
     "expires_in": 7200,
     "issue_date": 1722550505
 }
+```
 
 请注意保存访问令牌(Access Token) 和 刷新令牌(Refresh Token)
 
@@ -81,6 +84,7 @@ POST
 ```https://www.bandbbs.cn/api/oauth2/token```  
 请求方法：  
 GET
+
 请求参数： 
 |  参数   | 说明  |
 |  ----  | ----  |
@@ -88,6 +92,7 @@ GET
 
 返回值：  
 如果成功返回，将返回类似如下内容
+```
 {
     "user_id": 1,
     "scope": {
@@ -97,7 +102,7 @@ GET
     "expires_in": 7200,
     "issue_date": 1722550505
 }
-
+```
 
 对于使用其他API 请参照
 
@@ -116,6 +121,7 @@ GET
 ```https://www.bandbbs.cn/api/oauth2/token```  
 请求方法：  
 POST 
+
 请求参数：  
 |  参数   | 说明  |
 |  ----  | ----  |
@@ -128,6 +134,7 @@ POST
 
 返回值：  
 如果成功返回，将返回类似如下内容
+```
 {
     "access_token": "4f40d5ee8bf0476cb6b6f42ed53247a1",
     "refresh_token": "f6bec4e6ef7470fc6f0101e3975ad4b9",
@@ -135,5 +142,6 @@ POST
     "expires_in": 7200,
     "issue_date": 1722550505
 }
+```
 
 请注意保存访问令牌(Access Token) 和 刷新令牌(Refresh Token)
