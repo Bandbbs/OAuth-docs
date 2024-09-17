@@ -111,7 +111,7 @@ GET
 直接调用需要的API即可
 使用 Bearer Token 进行授权 Token值为 用户的访问令牌(Access Token)
 
-不需要使用 XF-Api-Key 等授权密钥
+不需要使用 XF-Api-Key 等授权密钥和请求参数
 
 ### 6. 访问令牌(Access Token)的刷新
 

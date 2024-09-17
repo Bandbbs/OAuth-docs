@@ -1,10 +1,10 @@
 # Bandbbs OAuth API documentation
 
-### 1. Obtian appid and appkey
+### 1. Obtian Client ID and Client Secret
 
-Usage 
-appid：Unique id of your application
-appkey：The key assigned to the appid
+Client ID: The unique identifier for the application, used to identify the identity of the connected app.
+Client Secret: The secret associated with the Client ID, used to verify the application when accessing user resources.
+Scope: Used to define the type of permissions requested.
 
 ### 2. Add Bandbbs Account Login Button
 
@@ -12,70 +12,137 @@ Insert the Bandbbs Account Login button or selection into your app or webpage
 
 ### 3. Redirect to interface to get Authorization Code
 
-redirect URL：  
-```https://www.bandbbs.cn/oauth/```  
+User redirection URL:  
+```https://www.bandbbs.cn/oauth2/authorize```  
 
-Request Parameters：  
-|  Parameter   | Description |
-|  ----  | ----  |
-| response_type  | Authorization type, the value is "code" |
-| client_id  | The appid assigned to the app  |
-| redirect_uri  | User will callback address after successful authorization, the callback address must be provided when apply for appid, note that requires URLEncode |
-| state  | Status value, which must be a 32-digit value composed of lowercase letters and/or numbers. It is used to prevent CSRF attacks and will be called back after successful authorization. Please make sure to strictly check the binding of the user to the state parameter status |
+Request Parameters:  
+| Parameter    | Description  |
+| ------------ | ------------- |
+| type         | Authorization type, fixed as "authorization_code" |
+| client_id    | Client ID assigned to the application |
+| redirect_uri | Callback URL after successful authorization, must be the same as the callback URL provided during Client ID application. Ensure URL is properly URL-encoded. |
+| state        | A 32-character value composed of lowercase letters and/or numbers, used to prevent CSRF attacks. The same state value will be returned in the callback after successful authorization. Ensure strict validation of the user's session with the state parameter. |
+| response_type | Response type, fixed as "code" |
+| scope        | The requested permission type, with multiple permissions separated by `%20` |
 
-URL example：  
-```https://www.bandbbs.cn/oauth/?response_type=code&client_id=1&redirect_uri=https%3A%2F%2Ftest.bandbbs.cn%2Fcallback.php&state=7a990681fc5c697092236ee1e4ece2d0```  
+Example:  
+```https://www.bandbbs.cn/oauth2/authorize?type=authorization_code&client_id=2550505&redirect_uri=https://test.bandbbs.cn/callback.php&response_type=code&scope=user%3Aread%20user%3Awrite&state=7a990681fc5c697092236ee1e4ece2d0```  
 
-Return：  
-1. If the user successfully login to authorize, the user will be redirected to the callback address provided, with the Authorization Code and the original state value at the end of the redirect_uri address.  
-such as：  
-```https://test.bandbbs.cn/callback.php?code=988940bb8e7ebcae2fdfa77f2c825cd7&state=7a990681fc5c697092236ee1e4ece2d0```
-Note: The Authorization Code expires 10 minutes after the user has successfully login and authorized.  
+Response Explanation:  
+1. If the user successfully log-in and authorizes, they will be redirected to the specified callback URL, with the Authorization Code and original state value appended to the redirect_uri. For example:  
+```https://test.bandbbs.cn/callback.php?code=988940bb8e7ebcae2fdfa77f2c825cd7&state=7a990681fc5c697092236ee1e4ece2d0```  
 
-| Parameter   | Description  |
-|  ----  | ----  |
-| code  | Authorization Code, This value is a 32-digit value composed of lowercase letters and/or numbers |
-| state  | Status value. It is used to prevent CSRF attacks and will be called back after successful authorization. Please make sure to strictly check the binding of the user to the state parameter status |
+| Parameter | Description  |
+| --------- | ------------- |
+| code      | Authorization code (Authorization Code) |
+| state     | The state value provided during the request, used to prevent CSRF attacks. Ensure strict validation of the user's session with the state parameter. |
 
-2. If the user cancels the login process during the login authorization process, the login page will be closed directly  
-3. If the input parameters are wrong, the wrong parameters will be displayed on page directly. Error Response is at the end of this doc.
-
-### 4. Get Access Token by Authorization Code
-
-This step must be performed on your server
-
-Request Address：  
-```https://api.bandbbs.cn/oauth/api/token.php```  
-Request Method：  
-GET  
-Request Parameters：  
-|  Parameter   | Description  |
-|  ----  | ----  |
-| grant_type  | Authorization type, this value is "authorization_code" |
-| client_id  | The appid assigned to your app |
-| client_secret  | The appkey assigned to your app |
-| code  | The Authorization Code contained in the parameter from callback address of the previous step |
-| redirect_uri  | User will callback address after successful authorization, the callback address must be provided when apply for appid, note that requires URLEncode |
+2. If the user cancels the login process during authorization, the login page will close directly.
 
 
-Return value：  
-If the return is successful, the content of the return will be an Access Token.  
-If error, the status code will be not 200 and the return content is the error message.
-Error Response is at the end of this doc.
+### 4. Get Authorization Code for Access Token
 
-### 5. Access to resources by Access Token  
+This step must be completed on your application server.
 
-This step must be performed on your server  
+Request URL:  
+```https://www.bandbbs.cn/api/oauth2/token```  
+Request Method:  
+POST  
 
-Please contact the administrator for the details of this step  
+Request Parameters:  
+| Parameter    | Description  |
+| ------------ | ------------- |
+| grant_type   | Authorization type, this value is "authorization_code" |
+| client_id    | The Client ID assigned to the application |
+| client_secret| The Client secret assigned to the application |
+| code         | The Authorization Code from the previous step, provided in the callback URL |
+| redirect_uri | The callback URL after successful authorization, must be the same as the callback URL provided during Client ID application. Ensure URL is properly URL-encoded. |
+
+Response:  
+If the request is successful, it will return a response similar to the following:
+```
+{
+    "access_token": "4f40d5ee8bf0476cb6b6f42ed53247a1",
+    "refresh_token": "f6bec4e6ef7470fc6f0101e3975ad4b9",
+    "token_type": "bearer",
+    "expires_in": 7200,
+    "issue_date": 1722550505
+}
+```
+Please ensure to save the Access Token and Refresh Token.
+
+### 5. Accessing Resources Using Access Token  
+
+This step must be completed on your application server.
+
+To retrieve information about the current token, use the following:
+
+Request URL:  
+```https://www.bandbbs.cn/api/oauth2/token```  
+Request Method:  
+GET
+
+Request Parameters:  
+| Parameter  | Description  |
+| ---------- | ------------- |
+| token      | The user's Access Token |
+
+Response:  
+If the request is successful, it will return a response similar to the following:
+
+```
+{
+    "user_id": 1,
+    "scope": {
+        "user:read": true,
+        "user:write": true
+    },
+    "expires_in": 7200,
+    "issue_date": 1722550505
+}
+```
 
 
-------------------------------------------------
+For other API usage, please refer to:  
+[https://xenforo.com/community/pages/api-endpoints/](https://xenforo.com/community/pages/api-endpoints/)
 
-Error Response：  
-|  Response   | Description  |
-|  ----  | ----  |
-| unsupported_response_type  | Invalid authorization type |
-| unauthorized_client  | client_id or api_key Invalid |
-| invalid_grant  | Invalid Authorization Code  |
-| invalid_redirect_uri  | Invalid callback address |
+Use the appropriate API directly. Authorization is done via Bearer Token, where the token value is the user's Access Token.
+
+No need to use XF-Api-Key or other authorization keys and request parameters.
+
+### 6. Refreshing Access Token
+
+This step must be completed on your application server.
+
+Request URL:  
+```https://www.bandbbs.cn/api/oauth2/token```  
+
+Request Method:  
+POST  
+
+Request Parameters:  
+| Parameter      | Description  |
+| -------------- | ------------- |
+| grant_type     | Authorization type, this value is "refresh_token" |
+| client_id      | The Client ID assigned to the application |
+| client_secret  | The client secret assigned to the application |
+| refresh_token  | The user's Refresh Token |
+| redirect_uri   | The callback URL after successful authorization, must be the same as the callback URL provided during Client ID application. Ensure URL is properly URL-encoded. |
+
+Response:  
+If the request is successful, it will return a response similar to the following:
+
+```
+{
+    "access_token": "4f40d5ee8bf0476cb6b6f42ed53247a1",
+    "refresh_token": "f6bec4e6ef7470fc6f0101e3975ad4b9",
+    "token_type": "bearer",
+    "expires_in": 7200,
+    "issue_date": 1722550505
+}
+```
+
+Please ensure to save the Access Token and Refresh Token.
+
+
+
