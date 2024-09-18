@@ -106,9 +106,12 @@ If the request is successful, it will return a response similar to the following
 For other API usage, please refer to:  
 [https://xenforo.com/community/pages/api-endpoints/](https://xenforo.com/community/pages/api-endpoints/)
 
-Use the appropriate API directly. Authorization is done via Bearer Token, where the token value is the user's Access Token.
+The most frequently used APIs are generally found in the "me/" endpoint section
+[https://xenforo.com/community/pages/api-endpoints/#route_get_me_](https://xenforo.com/community/pages/api-endpoints/#route_get_me_)
 
-No need to use XF-Api-Key or other authorization keys and request parameters.
+Call the API according to the endpoint documentation directly.
+Use Bearer Token for authorization in the request header, which the token value is the user's access token.
+There is no need to use authorization keys like XF-Api-Key or additional request parameters or header.
 
 ### 6. Refreshing Access Token
 
