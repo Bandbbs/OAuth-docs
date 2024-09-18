@@ -105,11 +105,13 @@ GET
 ```
 
 对于使用其他API 请参照
-
 [https://xenforo.com/community/pages/api-endpoints/](https://xenforo.com/community/pages/api-endpoints/)
 
-直接调用需要的API即可
-使用 Bearer Token 进行授权 Token值为 用户的访问令牌(Access Token)
+最可能用到的API一般在“me/”端点部分
+[https://xenforo.com/community/pages/api-endpoints/#route_get_me_](https://xenforo.com/community/pages/api-endpoints/#route_get_me_)
+
+直接按照端点文档调用需要的API即可
+在请求头使用 Bearer Token 进行授权 Token值为 用户的访问令牌(Access Token)
 
 不需要使用 XF-Api-Key 等授权密钥和请求参数
 
